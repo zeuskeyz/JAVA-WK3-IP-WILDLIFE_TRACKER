@@ -1,0 +1,51 @@
+{{#partial "content"}}
+
+<div class="text-center p-5">
+    {{#if sighting}}
+        <table class="table table-hover table-info opacity-75 my-3 py-3" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">HEALTH</th>
+                    <th scope="col">AGE</th>
+                    <th scope="col">LOCATION</th>
+                    <th scope="col">RANGER</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {{#each sighting}}
+                <tr>
+                    {{#if endangered}}
+                        <td class="text-start">AN-00{{id}}/E</td>
+                    {{else}}
+                        <td class="text-start">AN-00{{id}}/S</td>
+                    {{/if}}
+                    <td class="text-start">{{animal}}</td>
+                    {{#if endangered}}
+                        <td class="text-start">Endangered</td>
+                    {{else}}
+                        <td class="text-start">Safe</td>
+                    {{/if}}
+                    <td class="text-start">{{health}}</td>
+                    <td class="text-start">{{age}}</td>
+                    <td class="text-start">{{location}}</td>
+                    <td class="text-start">{{ranger}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <div class="text-center">
+            <h1 class="display-3">NO SIGHTING MADE YET</h1>
+        </div>
+    {{/if}}
+
+
+</div>
+
+{{/partial}}
+
+{{> tables-layout.hbs}}

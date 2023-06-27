@@ -1,0 +1,31 @@
+{{#partial "content"}}
+
+<div class="container text-center my-3 py-3 pb-0">
+    <div class=" mb-4 d-flex justify-content-left">
+        <form action="/add-animal" class="border border-2 p-5 rounded" method="post">
+            <h4 class="mb-4 text-info">NEW ANIMAL DETAILS</h4>
+            <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="animal" name="animal" required>
+                <label for="animal">Animal Name </label>
+            </div>
+            <div class="form-floating mb-4">
+                <select class="form-select" id="endangered" name="endangered" required>
+                    <option selected></option>
+                    <option value="true">YES</option>
+                    <option value="false">NO</option>
+                </select>
+                <label for="endangered">Endangered? </label>
+            </div>
+            <div class="my-4 px-0">
+                <button type="button" class="btn btn-lg btn-info col-12 rounded-pill">CLEAR</button>
+            </div>
+            <div class="my-4 px-0">
+                <button type="submit" class="btn btn-lg btn-info col-12 rounded-pill">SUBMIT</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{/partial}}
+
+{{> layout.hbs}}

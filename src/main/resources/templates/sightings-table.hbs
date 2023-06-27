@@ -1,0 +1,47 @@
+{{#partial "content"}}
+
+    <div class="text-center p-5">
+        {{#if sighting}}
+            <table class="table table-hover table-info opacity-75 my-3 py-3" id="animalData">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">ANIMAL</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">HEALTH</th>
+                    <th scope="col">AGE</th>
+                    <th scope="col">LOCATION</th>
+                    <th scope="col">RANGER</th>
+                    <th scope="col" class="text-center">DELETE</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {{#each sighting}}
+                    <tr>
+                        {{#if endangered}}
+                            <td class="text-start">AN-00{{id}}/E</td>
+                        {{else}}
+                            <td class="text-start">AN-00{{id}}/S</td>
+                        {{/if}}
+                        <td class="text-start">{{animal}}</td>
+                        {{#if endangered}}
+                            <td class="text-start">Endangered</td>
+                        {{else}}
+                            <td class="text-start">Safe</td>
+                        {{/if}}
+                        <td>{{health}}</td>
+                        <td>{{age}}</td>
+                        <td>{{location}}</td>
+                        <td>{{ranger}}</td>
+                        <td><a href="/delete/{{sighing}}" title="delete"><i class="bi bi-trash text-danger"></i></a></td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        {{/if}}
+    </div>
+
+{{/partial}}
+
+{{> tables-layout.hbs}}

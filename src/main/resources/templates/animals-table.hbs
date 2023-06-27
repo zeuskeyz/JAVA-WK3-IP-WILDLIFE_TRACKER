@@ -1,0 +1,46 @@
+{{#partial "content"}}
+
+<div class="text-center p-5">
+    {{#if animal}}
+        <table class="table table-hover table-info opacity-75 my-3 py-3" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">STATUS
+                    <th scope="col" class="text-center">EDIT</th>
+                    <th scope="col" class="text-center">DELETE</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+            {{#each animal}}
+                <tr>
+                    {{#if endangered}}
+                        <td class="text-start">AN-00{{id}}/E</td>
+                    {{else}}
+                        <td class="text-start">AN-00{{id}}/S</td>
+                    {{/if}}
+                    <td class="text-start">{{animal}}</td>
+                    {{#if endangered}}
+                        <td class="text-start">Endangered</td>
+                    {{else}}
+                        <td class="text-start">Safe</td>
+                    {{/if}}
+                    <td><a href="/edit/{{animal}}" class="text-decoration-none text-dark" title="edit"><i class="bi bi-pencil-square"></i></a></td>
+                    <td><a href="/delete/{{animal}}"  class="text-decoration-none text-dark" title="delete"><i class="bi bi-trash"></i></a></td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <div class="text-center my-5 py-5">
+            <a href="/add-animal" class="my-5 text-decoration-none text-light display-2">ADD ANIMAL <br><i class="bi bi-plus-circle-fill"></i></a>
+        </div>
+    {{/if}}
+</div>
+
+{{/partial}}
+
+{{> tables-layout.hbs}}
