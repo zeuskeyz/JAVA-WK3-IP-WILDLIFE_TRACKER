@@ -2,7 +2,7 @@
 
     <div class="text-center p-5">
         {{#if sighting}}
-            <table class="table table-hover table-info opacity-75 my-3 py-3" id="animalData">
+            <table class="table table-hover table-info opacity-75 my-3 py-3" id="myTable">
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -11,6 +11,7 @@
                     <th scope="col">HEALTH</th>
                     <th scope="col">AGE</th>
                     <th scope="col">LOCATION</th>
+                    <th scope="col">SIGHTING TIME</th>
                     <th scope="col">RANGER</th>
                     <th scope="col" class="text-center">DELETE</th>
                 </tr>
@@ -33,8 +34,9 @@
                         <td>{{health}}</td>
                         <td>{{age}}</td>
                         <td>{{location}}</td>
+                        <td>{{time}}</td>
                         <td>{{ranger}}</td>
-                        <td><a href="/delete/{{sighing}}" title="delete"><i class="bi bi-trash text-danger"></i></a></td>
+                        <td><a href="/delete-sighting/{{animal}}" title="delete"><i class="bi bi-trash text-danger"></i></a></td>
                     </tr>
                 {{/each}}
                 </tbody>

@@ -8,9 +8,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">NAME</th>
                     <th scope="col">STATUS
-                    <th scope="col" class="text-center">EDIT</th>
                     <th scope="col" class="text-center">DELETE</th>
-
                 </tr>
             </thead>
 
@@ -28,7 +26,6 @@
                     {{else}}
                         <td class="text-start">Safe</td>
                     {{/if}}
-                    <td><a href="/edit/{{animal}}" class="text-decoration-none text-dark" title="edit"><i class="bi bi-pencil-square"></i></a></td>
                     <td><a href="/delete/{{animal}}"  class="text-decoration-none text-dark" title="delete"><i class="bi bi-trash"></i></a></td>
                 </tr>
             {{/each}}

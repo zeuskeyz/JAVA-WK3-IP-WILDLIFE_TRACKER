@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Animals_DAO {
 
-    //CREATES THE HEROES TABLE IN THE DATABASE UPON STARTING THE APP
+    //CREATES THE ANIMALS TABLE IN THE DATABASE UPON STARTING THE APP
     public static void createTable (){
         try(Connection db = Database.getConnection().open()){
             String tableSpell = "CREATE TABLE IF NOT EXISTS animals (id serial, animal varchar unique, endangered boolean default false, deleted boolean default false);";
@@ -16,6 +16,7 @@ public class Animals_DAO {
         } catch (Exception error) {System.out.println(error.getMessage());}
     }
 
+    //ADDS AN ANIMAL'S DATA INTO THE ANIMALS TABLE
     public static void addAnimals (Animals newAnimal) {
         try (Connection db = Database.getConnection().open()) {
             String addingSpell = "INSERT INTO animals (animal, endangered) VALUES (UPPER(:animal), (:endangered));";
@@ -23,11 +24,12 @@ public class Animals_DAO {
         } catch (Exception error) { System.out.println(error.getMessage());}
     }
 
+    //RETURNS ALL ANIMALS
     public static List<Animals> allAnimals (){
         List<Animals> animalList = null;
         try(Connection db = Database.getConnection().open()) {
-            String heroes = "SELECT * FROM animals WHERE NOT deleted; ";
-            animalList = db.createQuery(heroes).executeAndFetch(Animals.class);
+            String querySpell = "SELECT * FROM animals WHERE NOT deleted; ";
+            animalList = db.createQuery(querySpell).executeAndFetch(Animals.class);
         } catch (Exception error){ System.out.println(error.getMessage());}
         return animalList;
     }

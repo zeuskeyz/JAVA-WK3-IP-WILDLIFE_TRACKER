@@ -34,13 +34,20 @@ public class Sighting_DAO {
     }
 
     //RETURNS ALL SIGHTED ANIMALS
-    public static List<Sighting> allSightings (){
+    public static List<Sighting> allSightings() {
         List<Sighting> everySighting = null;
         try (Connection db = Database.getConnection().open()){
             String sightingsSpell = "SELECT * FROM sightings WHERE NOT deleted;";
             everySighting = db.createQuery(sightingsSpell).executeAndFetch(Sighting.class);
         } catch (Exception error){System.out.println(error.getMessage());}
         return everySighting;
+    }
+
+    public static void deleteSighting(String animal){
+        try(Connection db = Database.getConnection().open()){
+            String deletionSpell = " UPDATE sightings SET deleted = true WHERE animal = (:animal);";
+            db.createQuery(deletionSpell).addParameter("animal", animal).executeUpdate();
+        } catch (Exception error) { System.out.println(error.getMessage());}
     }
 
 

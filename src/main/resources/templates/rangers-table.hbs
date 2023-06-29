@@ -1,0 +1,38 @@
+{{#partial "content"}}
+
+    <div class="text-center p-5">
+        {{#if ranger}}
+            <table class="table table-hover table-info opacity-75 my-3 py-3" id="myTable">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">RANGER</th>
+                    <th scope="col">USERNAME</th>
+                    <th scope="col">GENDER</th>
+                    <th scope="col">PHONE</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">SIGHTINGS</th>
+                    <th scope="col" class="text-center">DELETE</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {{#each ranger}}
+                    <tr>
+                        <td>RID-0{{id}}</td>
+                        <td>{{ranger}}</td>
+                        <td>{{username}}</td>
+                        <td>{{gender}}</td>
+                        <td>{{contacts}}</td>
+                        <td>{{email}}</td>
+                        <td></td>
+                        <td><a href="/delete-ranger/{{ranger}}" title="delete"><i class="bi bi-trash text-danger"></i></a></td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        {{/if}}
+    </div>
+{{/partial}}
+
+{{> tables-layout.hbs}}

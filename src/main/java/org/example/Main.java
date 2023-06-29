@@ -1,8 +1,10 @@
 package org.example;
 
 import org.example.dao.Animals_DAO;
+import org.example.dao.Rangers_DAO;
 import org.example.dao.Sighting_DAO;
 import org.example.models.Animals;
+import org.example.models.Rangers;
 import org.example.models.Sighting;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -25,9 +27,10 @@ public class Main {
 
         //LANDING PAGE
         get("/", (request, response) -> {
-            Animals_DAO.createTable(); Sighting_DAO.createTable();
+            Animals_DAO.createTable(); Sighting_DAO.createTable(); Rangers_DAO.createTable();
             return new ModelAndView(new HashMap<>(), "landing-page.hbs");
         }, views);
+
         //GETS THE ADDING ANIMALS PAGE
         get("/add-animal", (request, response) -> new ModelAndView(new HashMap<>(), "add-animal.hbs"), views);
 
@@ -43,7 +46,7 @@ public class Main {
             return null;
         });
 
-        //GETS THE ANIMAL REPORTS PAGE
+        //GETS THE ALL ANIMALS IN A TABLE FORMAT
         get("/animals",(request, response) -> {
             Map<String, Object> animalsMap = new HashMap<>();
             animalsMap.put("animal" , Animals_DAO.allAnimals());
@@ -54,7 +57,7 @@ public class Main {
         get("/delete/:animal", (req,res)-> {
             String animal = req.params(":animal");
             Animals_DAO.deleteAnimal(animal);
-            res.redirect("/home");
+            res.redirect("/animals");
             return null;
         },views);
 
@@ -66,11 +69,7 @@ public class Main {
 
         }, views);
 
-        post("/home", (request, response) -> {
-            System.out.println(request.queryParams());
-            return new ModelAndView(new HashMap<>(), "search-page.hbs");
-        },views);
-
+        //GETS ALL THE SIGHTINGS IN A TABLE FORMAT
         get("/sightings",(request, response) -> {
             Map<String, Object> allSightings = new HashMap<>();
             allSightings.put("sighting",Sighting_DAO.allSightings());
@@ -104,13 +103,45 @@ public class Main {
             return null;
         });
 
-        //GETS THE SIGHTINGS REPORTS PAGE
-        get("/animals",(request, response) -> {
-            Map<String, Object> sightingsMap = new HashMap<>();
-            sightingsMap.put("sighting" , Sighting_DAO.allSightings());
-            return new ModelAndView(sightingsMap, "animals-table.hbs");
+        //DELETING A SIGHTING FROM THE PAGE
+        get("/delete-sighting/:animal", (req,res)-> {
+            String animal = req.params(":animal");
+            Sighting_DAO.deleteSighting(animal);
+            res.redirect("/sightings");
+            return null;
         },views);
 
+        get("/add-ranger",(request, response) -> new ModelAndView(new HashMap<>(), "ranger-add.hbs"), views);
+
+        post("/add-ranger", (request, response) -> {
+
+            Integer id = null;
+            String ranger = request.queryParams("ranger");
+            String username = request.queryParams("username");
+            String gender = request.queryParams("gender");
+            String contacts = request.queryParams("contacts");
+            String email = request.queryParams("email");
+            Boolean deleted = false;
+
+            Rangers newRanger = new Rangers(id, ranger, username, gender, contacts, email, deleted);
+            Rangers_DAO.addRanger(newRanger);
+            response.redirect("/rangers");
+            return null;
+        }, views);
+
+        get("/rangers", (request, response) -> {
+            Map<String, Object> rangersMap = new HashMap<>();
+            rangersMap.put("ranger", Rangers_DAO.allRangers());
+            return new ModelAndView(rangersMap, "rangers-table.hbs");
+        }, views);
+
+        //DELETING AN ANIMAL FROM THE PAGE
+        get("/delete-ranger/:ranger", (req,res)-> {
+            String ranger = req.params(":ranger");
+            Sighting_DAO.deleteSighting(ranger);
+            res.redirect("/rangers");
+            return null;
+        },views);
 
 
     }
