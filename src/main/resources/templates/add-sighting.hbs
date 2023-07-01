@@ -167,7 +167,12 @@
                     </div>
 
                     <div class="form-floating col-6">
-                        <input type="text" class="form-control" id="ranger" name="ranger" required>
+                        <select class="form-select" id="ranger" name="ranger" required>
+                            <option selected></option>
+                            {{#each ranger}}
+                                <option value="{{username}}">{{ranger}}</option>
+                            {{/each}}
+                        </select>
                         <label for="ranger">Ranger Username </label>
                     </div>
                 </div>
