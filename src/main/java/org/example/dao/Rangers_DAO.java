@@ -1,7 +1,6 @@
 package org.example.dao;
 
 import org.example.database.Database;
-import org.example.models.Animals;
 import org.example.models.Rangers;
 import org.sql2o.Connection;
 
@@ -33,6 +32,7 @@ public class Rangers_DAO {
         return rangersList;
     }
 
+
     //DELETES A RANGER FROM THE DATABASE
     public static void deleteRanger (String ranger){
         try(Connection db = Database.getConnection().open()){
@@ -40,6 +40,8 @@ public class Rangers_DAO {
             db.createQuery(deletionSpell).addParameter("ranger", ranger).executeUpdate();
         } catch (Exception error) { System.out.println(error.getMessage());}
     }
+
+
 
 
 }
